@@ -32,7 +32,9 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="varchar">Foto</label>
+                        <?php if (isset($foto) && $foto != NULL): ?>
                         <img src="<?php echo $foto ?>" class="form-control" style="width: auto; height: 50px" align="center">
+                        <?php endif; ?>
                         <input type="file" name="foto" class="form-control" accept="image/*">
                     </div>
                 </div>
