@@ -28,7 +28,7 @@
 
 <div class="container-fluid">
 	<h1 style="text-transform: bold;">
-		<marquee><strong>ISS (International Service System) Indonesia</strong></marquee>
+		<marquee><strong>PT. ISS (International Service System) Indonesia</strong></marquee>
 	</h1>
 </div>
 
@@ -41,7 +41,7 @@
 						<strong class="number" data-number="<?php echo $total_anggota ?>">0</strong>
 					</div>
 					<div class="text">
-						<span>Anggota Terdaftar</span>
+						<span>Instansi Terdaftar</span>
 					</div>
 				</div>
 			</div>

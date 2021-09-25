@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 01 Jul 2020 pada 11.28
--- Versi Server: 5.7.19
--- PHP Version: 7.1.9
+-- Host: localhost
+-- Waktu pembuatan: 25 Sep 2021 pada 18.50
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,9 +27,8 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `agenda`
 --
 
-DROP TABLE IF EXISTS `agenda`;
-CREATE TABLE IF NOT EXISTS `agenda` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `agenda` (
+  `id` int(11) NOT NULL,
   `judul` varchar(200) NOT NULL,
   `tempat` varchar(150) DEFAULT NULL,
   `deskripsi` text NOT NULL,
@@ -38,11 +36,10 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `bulan` int(2) NOT NULL,
   `tahun` int(4) NOT NULL,
   `timestamps` varchar(50) NOT NULL,
-  `gambar` text,
+  `gambar` text DEFAULT NULL,
   `userpost` varchar(35) NOT NULL,
-  `tampilkan` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `tampilkan` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `agenda`
@@ -60,19 +57,17 @@ INSERT INTO `agenda` (`id`, `judul`, `tempat`, `deskripsi`, `tanggal`, `bulan`, 
 -- Struktur dari tabel `anggota`
 --
 
-DROP TABLE IF EXISTS `anggota`;
-CREATE TABLE IF NOT EXISTS `anggota` (
+CREATE TABLE `anggota` (
   `perusahaan` varchar(100) NOT NULL,
   `nomor` varchar(100) NOT NULL,
   `nama` varchar(200) NOT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `wilayah` varchar(100) DEFAULT NULL,
   `telepon` varchar(25) DEFAULT '-',
   `fax` varchar(35) DEFAULT '-',
   `website` varchar(200) DEFAULT '-',
-  `foto` text,
-  `username` varchar(35) NOT NULL,
-  PRIMARY KEY (`nomor`)
+  `foto` text DEFAULT NULL,
+  `username` varchar(35) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -88,11 +83,10 @@ INSERT INTO `anggota` (`perusahaan`, `nomor`, `nama`, `alamat`, `wilayah`, `tele
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `anggota_view`
+-- Stand-in struktur untuk tampilan `anggota_view`
 -- (Lihat di bawah untuk tampilan aktual)
 --
-DROP VIEW IF EXISTS `anggota_view`;
-CREATE TABLE IF NOT EXISTS `anggota_view` (
+CREATE TABLE `anggota_view` (
 `perusahaan` varchar(100)
 ,`nomor` varchar(100)
 ,`nama` varchar(200)
@@ -114,14 +108,12 @@ CREATE TABLE IF NOT EXISTS `anggota_view` (
 -- Struktur dari tabel `gallery`
 --
 
-DROP TABLE IF EXISTS `gallery`;
-CREATE TABLE IF NOT EXISTS `gallery` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `gallery` (
+  `id` int(11) NOT NULL,
   `idagenda` int(11) NOT NULL,
   `gambar` text NOT NULL,
-  `caption` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+  `caption` varchar(200) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `gallery`
@@ -138,15 +130,13 @@ INSERT INTO `gallery` (`id`, `idagenda`, `gambar`, `caption`) VALUES
 -- Struktur dari tabel `komentar`
 --
 
-DROP TABLE IF EXISTS `komentar`;
-CREATE TABLE IF NOT EXISTS `komentar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `komentar` (
+  `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(80) NOT NULL,
   `subject` varchar(100) NOT NULL,
-  `pesan` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `pesan` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `komentar`
@@ -161,11 +151,9 @@ INSERT INTO `komentar` (`id`, `nama`, `email`, `subject`, `pesan`) VALUES
 -- Struktur dari tabel `profil`
 --
 
-DROP TABLE IF EXISTS `profil`;
-CREATE TABLE IF NOT EXISTS `profil` (
+CREATE TABLE `profil` (
   `profil_name` varchar(100) NOT NULL,
-  `profil_values` text,
-  PRIMARY KEY (`profil_name`)
+  `profil_values` text DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -173,14 +161,14 @@ CREATE TABLE IF NOT EXISTS `profil` (
 --
 
 INSERT INTO `profil` (`profil_name`, `profil_values`) VALUES
-('sejarah', 'ISS (Ikatan Nasional Konsultan Indonesia) merupakan asosiasi perusahaan konsultan independen yang didirikan pada tanggal 29 Juni 1979, sebagai hasil fusi antara IKINDO (Ikatan Konsultan Indonesia) dan PKTPI (Persatuan Konsultan Teknik Pembangunan Indonesia). Anggota ISS tersebar di 33 provinsi di seluruh Indonesia dan total memiliki anggota 7000 perusahaan konsultan. \r\n</br>\r\nISS Indonesia teletak di Provinsi Jambi, sekarang memiliki anggota aktif 100 perusahaan, merupakan ISS provinsi terbesar diantara 33 provinsi di Indonesia.'),
+('sejarah', '<p><span class=\"ILfuVd NA6bn\"><span class=\"hgKElc\"><b>ISS</b> A/S \r\n(International Service System) adalah sebuah perusahaan layanan \r\nfasilitas yang didirikan di Kopenhagen, Denmark pada tahun 1901. Layanan\r\n <b>ISS</b> meliputi layanan kebersihan, layanan dukungan, layanan \r\nproperti, layanan katering, layanan pengamanan, dan layanan manajemen \r\nfasilitas.</span></span></p>'),
 ('visi', ' <div xss=\"removed\" bis_skin_checked=\"1\" style=\"text-align: center;\"><span xss=\"removed\">Menjadikan ISS Indonesia dapat berperan di tingkat Provinsi maupun Nasional dan menjadi pelopor dalam penerapan Good Corporate Governance dan penerapan praktek usaha jasa konsultansi bebas dari korupsi.</span></div>'),
 ('misi', '<ol>\r\n	<li>Peningkatan pelayanan, kompetensi, dan penerapan kode etik anggota</li>\r\n	<li>Mengefektifkan struktur organisasi ISS DKI jakarta</li>\r\n	<li>Meningkatkan hubungan sinergis ISS DKI jakarta dengan DPN ISS, Pemrpov DKI jakarta, dan institusi nasional lain yang relevan</li>\r\n	<li>Penguatan peran DPP ISS DKI Jakarta sebagai mitra handal Pemrpov DKI Jakarta dalam perencanaan, pengawasan dan evaluasi pembangunan</li>\r\n	<li>Mengupayakan terwujudnya regulasi usaha jasa konsultansi yang kondusif di tingkat provinsi dan nasional</li>\r\n	<li>Berupaya mencegah terjadinya persaingan usaha yang tidak sehat</li>\r\n	<li>Meningkatkan advokasi regulasi, mediasi perselisihan angota dan perlindungan anggota secara berkesinambungan</li>\r\n	<li>Melindungi pangsa pasar usaha kecil dan meningkatkan kerjasama usaha kecil dengan usaha non kecil</li>\r\n	<li>Pengembangan pasar melalui peningkatan komptensi, fasilitasi dan penguatanjaringan keluar negeri, penetrasi pasar swasta dan inovasi</li>\r\n	<li>Penginkatan pencitranan DPP ISS melalui berbagai macam media massa, bakti soisla, dna bakti profesi</li>\r\n	<li>Penginkatan profesionalisme dan daya saing anggota di segala bidang, khususnya menghadapi isue aktivitas usaha lintas negara (borderless economy)</li>\r\n	<li>Pengembangan pasar bagi anggota di sektor swasta dan non jasa konstruksi</li>\r\n	<li>ISS DKI aktif mensosialisasikan Good Corporate Governance dan tidak mentolerir commitment fee</li>\r\n</ol>'),
-('alamat', 'Jl. Pertani No. 7, Duren Tiga - Pancoran Jakarta Selatan 12760'),
+('alamat', 'Kota Administrasi Jakarta Selatan , DKI Jakarta<br>\r\n						Indonesia					'),
 ('kontak', '<p>\r\n                                T: <a href=\"tel:0217942940\">+62-21-7942940 (H)</a><br>\r\n                                T: <a href=\"tel:082112079750\">+62-8211 2079750</a><br>\r\n								F: +62-21-7942941<br>\r\n								E: <a href=\"mailto:sekretariat@ISS-dki.org\">sekretariat@ISS-dki.org</a><br>\r\n                                E: <a href=\"mailto:ISS_dki@yahoo.com\">ISS_dki@yahoo.com</a><br>\r\n							</p>'),
 ('telepon', '+62-821 120 79 750, +62-21-7942941'),
 ('email', ' iss_indonesia@yahoo.com'),
-('tentang', 'ISS (Ikatan Nasional Konsultan Indonesia) merupakan asosiasi perusahaan konsultan independen yang didirikan pada tanggal 29 Juni 1979, sebagai hasil fusi antara IKINDO (Ikatan Konsultan Indonesia) dan PKTPI (Persatuan Konsultan Teknik Pembangunan Indonesia). Anggota ISS tersebar di 33 provinsi di seluruh Indonesia dan total memiliki anggota 7000 perusahaan konsultan. \r\n</br>\r\nISS Indonesia teletak di Provinsi Jambi, sekarang memiliki anggota aktif 100 perusahaan, merupakan ISS provinsi terbesar diantara 33 provinsi di Indonesia.');
+('tentang', '<span>ISS Indonesia adalah perusahaan Integrated Facility Service yang \r\nterbaik dan terbesar di Indonesia dengan cakupan layanan atas Facility \r\nServices ( cleaning service, office support service, gardening &amp; \r\nlandscaping, Integrated Pest Management, building maintenance service, \r\nindoor air quality service, wash room service, portable toilet service) ,\r\n Acces Control ( security service ) , Catering Service, Parking \r\nManagement Service.\r\n\r\nISS Indonesia tersebar di 140 kota, 9 kota besar diantaranya seperti \r\nJakarta, Bandung, Semarang, Surabaya, Denpasar, Medan, Batam, Pekanbaru,\r\n Balikpapan dan Makasar. Dengan disupport oleh lebih dari 300 manager, \r\n900 supervisor, 2500 teamleader dan 54.000 operator, dengan lebih dari \r\n3.000 kontrak B2B dan ISS Indonesia.</span>');
 
 -- --------------------------------------------------------
 
@@ -188,15 +176,13 @@ INSERT INTO `profil` (`profil_name`, `profil_values`) VALUES
 -- Struktur dari tabel `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `username` varchar(35) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `level` enum('Anggota','Admin','Pimpinan') NOT NULL DEFAULT 'Anggota',
   `email` varchar(80) DEFAULT NULL,
-  `telepon` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`username`)
+  `telepon` varchar(25) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -216,7 +202,69 @@ INSERT INTO `user` (`username`, `password`, `nama`, `level`, `email`, `telepon`)
 --
 DROP TABLE IF EXISTS `anggota_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `anggota_view`  AS  select `anggota`.`perusahaan` AS `perusahaan`,`anggota`.`nomor` AS `nomor`,`anggota`.`nama` AS `nama`,`anggota`.`alamat` AS `alamat`,`anggota`.`wilayah` AS `wilayah`,`anggota`.`telepon` AS `telepon`,`anggota`.`fax` AS `fax`,`anggota`.`website` AS `website`,`anggota`.`foto` AS `foto`,`anggota`.`username` AS `username`,`user`.`password` AS `password`,`user`.`email` AS `email`,`user`.`level` AS `level` from (`user` left join `anggota` on((`user`.`username` = `anggota`.`username`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `anggota_view`  AS SELECT `anggota`.`perusahaan` AS `perusahaan`, `anggota`.`nomor` AS `nomor`, `anggota`.`nama` AS `nama`, `anggota`.`alamat` AS `alamat`, `anggota`.`wilayah` AS `wilayah`, `anggota`.`telepon` AS `telepon`, `anggota`.`fax` AS `fax`, `anggota`.`website` AS `website`, `anggota`.`foto` AS `foto`, `anggota`.`username` AS `username`, `user`.`password` AS `password`, `user`.`email` AS `email`, `user`.`level` AS `level` FROM (`user` left join `anggota` on(`user`.`username` = `anggota`.`username`)) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `agenda`
+--
+ALTER TABLE `agenda`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`nomor`);
+
+--
+-- Indeks untuk tabel `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `komentar`
+--
+ALTER TABLE `komentar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `profil`
+--
+ALTER TABLE `profil`
+  ADD PRIMARY KEY (`profil_name`);
+
+--
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `agenda`
+--
+ALTER TABLE `agenda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT untuk tabel `komentar`
+--
+ALTER TABLE `komentar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
