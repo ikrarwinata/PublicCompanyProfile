@@ -208,10 +208,21 @@ class Welcome extends CI_Controller
     public function tentang()
     {
         $data = array(
-            'total_agenda'=>$this->db->select("COUNT(*) AS res")->get("agenda")->row()->res,
-            'total_anggota'=>$this->db->select("COUNT(*) AS res")->get("anggota")->row()->res,
-            'konten'=>"tentang",
-            'judul'=>"Tentang",
+            'total_agenda' => $this->db->select("COUNT(*) AS res")->get("agenda")->row()->res,
+            'total_anggota' => $this->db->select("COUNT(*) AS res")->get("anggota")->row()->res,
+            'konten' => "tentang",
+            'judul' => "Tentang",
+        );
+        $this->load->view("container", $data);
+    }
+
+    public function kontak()
+    {
+        $data = array(
+            'total_agenda' => $this->db->select("COUNT(*) AS res")->get("agenda")->row()->res,
+            'total_anggota' => $this->db->select("COUNT(*) AS res")->get("anggota")->row()->res,
+            'konten' => "kontak",
+            'judul' => "Kontak",
         );
         $this->load->view("container", $data);
     }

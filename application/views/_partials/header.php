@@ -34,6 +34,7 @@
     			<ul class="navbar-nav m-auto">
     				<li class="nav-item"><a href="Welcome/index" class="nav-link">Beranda</a></li>
     				<li class="nav-item"><a href="Welcome/tentang" class="nav-link">Tentang</a></li>
+    				<li class="nav-item"><a href="Welcome/kontak" class="nav-link">Kontak</a></li>
     				<li class="nav-item"><a href="Welcome/agenda" class="nav-link">Agenda Kegiatan</a></li>
     				<li class="nav-item"><a href="Welcome/anggota" class="nav-link">Instansi</a></li>
     				<li class="nav-item dropdown">
